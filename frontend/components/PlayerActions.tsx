@@ -65,8 +65,11 @@ export default function PlayerActions() {
           <Button onClick={() => {
             if (betAmount>40)
               handleAction(ActionType.RAISE)
-            toast.error("Increase the Bet Amount");
-            console.log("Raise")
+            else {
+              toast.error("Increase the Bet Amount");
+              // console.log("Raise")
+            }
+            
             // setError("")
           }}>
             Raise

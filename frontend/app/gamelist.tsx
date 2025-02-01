@@ -8,6 +8,7 @@ import PokerTable from "@/components/PokerTable";
 import PlayerActions from "@/components/PlayerActions";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import GameCompleteModal from "@/components/Modal";
 
 export default function HomePage() {
   const { state, startNewHand } = useGame();
@@ -57,7 +58,12 @@ export default function HomePage() {
       {state.handId && state.currentStreet !== 'showdown' && (
         <PlayerActions />
       )}
-
+      {
+        state.isComplete && (
+          <GameCompleteModal stackSize={stackSize}/>
+        )
+      }
+    
       {/* Game Log */}
       <Card>
         <CardHeader>

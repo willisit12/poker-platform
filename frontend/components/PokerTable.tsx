@@ -7,7 +7,7 @@ export default function PokerTable() {
 
     useEffect(()=>{
       // console.log(state)
-      toast.error("Increase the Bet Amount");
+      // toast.error("Increase the Bet Amount");
     },[state])
 
   return (

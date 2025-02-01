@@ -67,7 +67,8 @@ type GameState = {
   currentRoundContributions: number[];
   contributions: number[];
   number_of_rounds: number;
-  stackSize: number
+  stackSize: number,
+  isComplete: boolean
 };
 
 type GameContextType = {
@@ -99,7 +100,8 @@ const initialState: GameState = {
   currentRoundContributions: Array(6).fill(0),
   contributions: Array(6).fill(0),
   number_of_rounds: 0,
-  stackSize: 0
+  stackSize: 0,
+  isComplete: false
 };
 
 function gameReducer(state: GameState, action: any): GameState {
@@ -108,6 +110,8 @@ function gameReducer(state: GameState, action: any): GameState {
       return { ...initialState, ...action.payload };
     case 'UPDATE_STATE':
       return { ...state, ...action.payload };
+    case 'GAME_COMPLETE':
+      return { ...state, ...action.payload }
     default:
       return state;
   }
@@ -240,7 +244,8 @@ export default function GameProvider({ children }: { children: ReactNode }) {
           if (i === bbIndex) return 40;
           return 0;
         }),
-        stackSize
+        stackSize,
+        isComplete: false
       }
     });
   };
@@ -299,6 +304,13 @@ export default function GameProvider({ children }: { children: ReactNode }) {
     try {
       const result = await GameAPI.postHand(handData);
       console.log(result.winners)
+
+      dispatch({
+        type: 'UPDATE_STATE',
+        payload: {
+          isComplete: true
+        }
+      });
 
     } catch (error) {
       console.error('Error submitting hand:', error);
