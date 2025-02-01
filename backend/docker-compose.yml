@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=poker
+      - POSTGRES_PASSWORD=pokerpass
+      - POSTGRES_DB=poker_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - appnetwork
+
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+      DB_NAME: poker_db
+      DB_USER: poker
+      DB_PASSWORD: pokerpass
+    depends_on:
+      - db
+    networks: 
+      - appnetwork
+
+networks:
+  appnetwork:
+    driver: bridge
+
+volumes:
+  postgres_data: 
