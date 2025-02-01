@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useGame } from "@/context/GameContext";
 import { Button } from "./ui/button";
+import toast from "react-hot-toast";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement>  {
     stackSize: number;
@@ -11,6 +12,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>  {
 
 
   export default function GameCompleteModal({stackSize}: Props) {
+
+    useEffect(()=>{
+        toast.success("Game completed: Check the winnings on history page")
+    },[])
     
   const { state, startNewHand } = useGame();
   return (

@@ -59,14 +59,21 @@ export default function PlayerActions() {
               <ChevronUp />
             </Button>
           </div>
-          <Button onClick={() => handleAction(ActionType.BET)}>
+          <Button onClick={() => {
+             if (betAmount>=80)
+              handleAction(ActionType.BET)
+            else {
+              toast.error("Increase the Bet Amount to 80 or above");
+              // console.log("Raise")
+            }
+          }}>
             Bet
           </Button>
           <Button onClick={() => {
-            if (betAmount>40)
+            if (betAmount>=80)
               handleAction(ActionType.RAISE)
             else {
-              toast.error("Increase the Bet Amount");
+              toast.error("Increase the Bet Amount to 80 or above");
               // console.log("Raise")
             }
             
