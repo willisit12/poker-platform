@@ -7,6 +7,7 @@ import { useGame } from "@/context/GameContext";
 import PokerTable from "@/components/PokerTable";
 import PlayerActions from "@/components/PlayerActions";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function HomePage() {
   const { state, startNewHand } = useGame();
@@ -19,7 +20,15 @@ export default function HomePage() {
       {/* Game Controls */}
       <Card>
         <CardHeader>
-          <CardTitle>Game Controls</CardTitle>
+          <CardTitle>Game Controls
+          <Link
+          href={
+            '/history'
+          }
+          className="p-4 hover:bg-gray-100 text-start border-b bg-black text-white hover:text-black rounded-lg ml-2"
+          title="History"
+        >History</Link>
+          </CardTitle>
         </CardHeader>
         <CardContent className="flex gap-4 items-center">
           <div className="flex-1 flex gap-2 items-center">
