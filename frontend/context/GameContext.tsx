@@ -20,7 +20,7 @@ export enum ActionType {
 
 }
 
-type Player = {
+export type Player = {
   id: string;
   playerIndex: number;
   name: string;

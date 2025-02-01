@@ -13,7 +13,7 @@ services:
       - appnetwork
 
   backend:
-    build: .
+    build: ./backend
     ports:
       - "8000:8000"
     environment:
@@ -26,9 +26,18 @@ services:
     networks: 
       - appnetwork
 
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - appnetwork
+
 networks:
   appnetwork:
     driver: bridge
 
 volumes:
-  postgres_data: 
+  postgres_data:
