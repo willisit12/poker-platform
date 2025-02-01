@@ -32,43 +32,27 @@ export default function PlayerActions() {
         <CardTitle>Player Actions</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="flex gap-2 flex-wrap">
-          <Button variant="destructive" onClick={() => handleAction(ActionType.FOLD)}>
-            Fold
-          </Button>
-          <Button variant="secondary" onClick={() => handleAction(ActionType.CHECK)}>
-            Check
-          </Button>
-          <Button onClick={() => handleAction(ActionType.CALL)}>
-            Call ({Math.max(40, state.currentBet)})
-          </Button>
-        </div>
-
-        <div className="flex gap-2 items-center">
-          <div className="flex items-center gap-1">
-            <Button variant="ghost" onClick={() => setBetAmount(p => Math.max(40, p - 40))}>
-              <ChevronDown />
+        {/* Player Actions */}
+      <div className="rounded-lg bg-white/10 p-4 backdrop-blur">
+        <div className="flex items-center gap-4">
+          <Button variant="destructive" onClick={() => handleAction(ActionType.FOLD)}>Fold</Button>
+          <Button variant="secondary" onClick={() => handleAction(ActionType.CHECK)}>Check</Button>
+          <Button variant="default"
+            onClick={() => handleAction(ActionType.CALL)}
+          >Call ({Math.max(40, state.currentBet)})</Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" onClick={() => setBetAmount(p => Math.max(40, p - 40))}>
+              <ChevronDown className="h-4 w-4" />
             </Button>
-            <Input
+            <Input type="number" className="w-24"
               value={betAmount}
               onChange={(e) => setBetAmount(Number(e.target.value))}
-              className="w-32"
-              step={40}
+              step={40} 
             />
-            <Button variant="ghost" onClick={() => setBetAmount(p => p + 40)}>
-              <ChevronUp />
+            <Button variant="ghost" size="icon" onClick={() => setBetAmount(p => p + 40)}>
+              <ChevronUp className="h-4 w-4" />
             </Button>
           </div>
-          <Button onClick={() => {
-             if (betAmount>=80)
-              handleAction(ActionType.BET)
-            else {
-              toast.error("Increase the Bet Amount to 80 or above");
-              // console.log("Raise")
-            }
-          }}>
-            Bet
-          </Button>
           <Button onClick={() => {
             if (betAmount>=80)
               handleAction(ActionType.RAISE)
@@ -78,13 +62,10 @@ export default function PlayerActions() {
             }
             
             // setError("")
-          }}>
-            Raise
-          </Button>
-          <Button variant="ghost" onClick={() => handleAction(ActionType.ALLIN)}>
-            All-In
-          </Button>
+          }}>Raise</Button>
+          <Button variant="secondary" onClick={() => toast.success("ALL IN")}>All-In</Button>
         </div>
+      </div>
       </CardContent>
     </Card>
   );
